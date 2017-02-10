@@ -27,6 +27,8 @@ function Player:_init(level)
 	self.color = {225, 200, 0}
 	self.size = 10
 	
+	self.screenHeight = 800
+	
 end
 
 function Player:die()
@@ -37,7 +39,7 @@ function Player:die()
 end
 
 function Player:fly()
-	if key == "space" and not self.dead then
+	if key == "space" and not self.dead and not self.still then
 		self.vy = self.vy - self.jumpAmount
 	end
 end
@@ -87,9 +89,8 @@ function Player:update(dt)
 	end
 	
 	-- Ground Collisions
-	if self.y + self.size > self.level.ground then
+	if self.y > self.screenHeight then
 		self.dead = true
 		self.gameover = true
-		self.y = self.level.ground - self.size
 	end
 end
