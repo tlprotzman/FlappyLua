@@ -7,7 +7,7 @@ function Level:_init(game)
 
 	self.sinceLastPipe = 0 
 	self.frequency = 2 --Interval to draw a new pipe
-	self.height = 100 -- pixels tall to make the gap
+	self.height = 150 -- pixels tall to make the gap
 	self.pipeWidth = 100
 	self.velocity = 200 --Speed of the pipes
 	self.pipes = {}
@@ -16,6 +16,7 @@ function Level:_init(game)
 	self.SCREENHEIGHT = game.SCREENHEIGHT
 
 	self.score = 0
+	self:makeElement()
 end
 
 function Level:load()
@@ -65,7 +66,9 @@ function Level:resize(w, h)
 end
 
 function Level:keypressed(key, unicode)
-	--
+	if (key == "escape") then
+		self.game:addToScreenStack(self.pauseMenu)
+	end
 end
 
 function Level:keyreleased(key, unicode)
