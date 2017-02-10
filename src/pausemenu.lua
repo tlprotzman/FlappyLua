@@ -67,7 +67,7 @@ function PauseMenu:mousereleased(x, y, button)
 		if v:updateMouse(x, y) then
 			-- print(v.text .. " was pressed")
 			if v.text == "Exit" then
-				self.game:popScreenStack()
+				self.game:popScreenStack() -- needs to be called from the level, otherwise it will screw up probably.
 				self.game:popScreenStack()
 			elseif v.text == "Resume" then
 				self.game:popScreenStack()
