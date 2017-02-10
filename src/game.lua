@@ -33,7 +33,7 @@ function Game:_init()
 	-- bgm:setLooping( true )
 	-- bgm:play()
 
-	self:addToScreenStack(self.level)
+	self:addToScreenStack(self.mainMenu)
 	-- self:addToScreenStack(self.player)
 	self.fullCanvas = love.graphics.newCanvas(self.SCREENWIDTH, self.SCREENHEIGHT)
 end
@@ -44,6 +44,7 @@ end
 
 function Game:draw()
 	love.graphics.setCanvas(self.fullCanvas)
+	love.graphics.clear()
 	-- love.graphics.draw(self.bg, 0, 0)
 
 	local thingsToDraw = 1 -- this will become the index of the lowest item to draw

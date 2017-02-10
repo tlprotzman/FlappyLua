@@ -64,10 +64,14 @@ function MainMenu:keyreleased(key, unicode)
 end
 
 function MainMenu:mousepressed(x, y, button)
-	--
 	for k, v in pairs(self.buttons) do
 		if v:updateMouse(x, y) then
-			print(v.text .. " was pressed")
+			-- print(v.text .. " was pressed")
+			if v.text == "Quit" then
+				love.event.quit()
+			elseif v.text == "Play" then
+				self.game:addToScreenStack(self.game.level)
+			end
 		end
 	end
 end
