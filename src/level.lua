@@ -8,8 +8,8 @@ function Level:_init(game)
 	self.sinceLastPipe = 0 
 	self.frequency = 2 --Interval to draw a new pipe
 	self.height = 100 -- pixels tall to make the gap
-	self.pipeWidth = 40
-	self.velocity = 5 --Speed of the pipes
+	self.pipeWidth = 100
+	self.velocity = 200 --Speed of the pipes
 	self.pipes = {}
 
 	self.SCREENWIDTH = game.SCREENWIDTH
@@ -51,8 +51,11 @@ function Level:update(dt)
 		pipe.x = pipe.x - moveBy
 	end
 	self.sinceLastPipe = self.sinceLastPipe + dt
+	print(self.sinceLastPipe)
 	if (self.sinceLastPipe > self.frequency) then
+		print(newPipe)
 		self:makeElement()
+		self.sinceLastPipe = 0
 	end
 end
 
