@@ -26,3 +26,12 @@ function Level:makeElement()
 	pipes.insert(upperPipe)
 	pipes.insert(lowerPipe)
 end
+
+function Level:draw()
+	for i, pipe in pairs(pipes)
+		if (pipe[x] < self.screenX + self.SCREENWIDTH and pipe[x] + pipe[w] > self.screenX)
+			love.graphics.setColor(40, 219, 13)
+			love.graphics.rectangle("fill", pipe[x], pipe[y], pipe[w], pipe[h])
+		end
+	end
+end
