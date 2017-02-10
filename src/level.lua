@@ -2,8 +2,9 @@ require "class"
 
 Level = class()
 
-function Level:_init(game)
+function Level:_init(game, player)
 	self.game = game
+	self.player = player
 
 	self.sinceLastPipe = 0 
 	self.frequency = 2 --Interval to draw a new pipe
@@ -57,8 +58,16 @@ function Level:update(dt)
 		self:makeElement()
 		self.sinceLastPipe = 0
 	end
+	
+	-- Pipe Collisions
+	for i, pipe in pairs(self.pipes) do
+		if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.w then
+			if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.h then
+				self.player:die()
+			end
+		end
+	end
 end
-
 
 function Level:resize(w, h)
 	--
