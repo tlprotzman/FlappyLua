@@ -12,12 +12,11 @@ function love.load(args)
 	
 	game:load(args)
 	--local width, height = 512, 256
-	local width, height = 1920, 1080
-	love.window.setMode(width, height, {resizable = true})
-	love.window.setFullscreen(true)
+	love.window.setMode(600, 800, {resizable = true})
+	-- love.window.setFullscreen(true)
 	-- not much here
 	game:resize(width, height)
-	love.mouse.setVisible(false)
+	love.mouse.setVisible(true)
 end
 
 function love.resize(w, h)
