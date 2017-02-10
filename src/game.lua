@@ -2,6 +2,7 @@
 require "player"
 require "level"
 require "mainmenu"
+require "pausemenu"
 
 require "class"
 
@@ -24,6 +25,7 @@ function Game:_init()
 	self.mainMenu = MainMenu(self)
 	self.level= Level(self)
 	self.player = Player(self.level)
+	self.pauseMenu = PauseMenu(self)
 	self.screenStack = {}
 	
 	-- self.bg = love.graphics.newImage('images/bg.png')
