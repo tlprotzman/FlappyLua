@@ -2,25 +2,36 @@ require "class"
 
 Player = class()
 
-
+--Screensize = 600x800
 
 function Player:_init(level)
 	
-	self.level = level
+	--self.level = level
 	
 	self.jumpAmount = 10
 	self.gravity = 3
-	self.x = 50
-	self.y = 50
+	self.x = 200
+	self.y = 400
 	self.vx = 0
 	self.vy = 0
+	self.still = true
 	
 	self.color = color
 	self.size = 10
+	
+end
 
-	self.SCREENWIDTH = love.graphics.getWidth()
-	self.SCREENHEIGHT = love.graphics.getHeight()
+function Player:die()
+	if not self.dead then
+		self.dead = true
+		self.vy = -jumpAmount
+	end
+end
 
+function Player:fly()
+	if key == "space" and not self.dead then
+		self.vy = self.vy - self.jumpAmount
+	end
 end
 
 function Player:resize(screenWidth, screenHeight)
@@ -34,19 +45,23 @@ function Player:draw()
 end
 
 function Player:keypressed(key)
-	if key == "space" and not self.dead then
-		self.vy = self.vy - self.jumpAmount
-	end
+	self.still = false
+	self:fly()
 end
 
-function Player:die()
-	self.dead = true
-	self.vy = -jumpAmount
+function Game:mousepressed(x, y, button)
+	self.still = false
+	self:fly()
 end
 
 function Player:update(dt)
-	self.vy = self.vy + self.gravity
+
+	if self.still then
+		return 
+	end
 	
+	self.vy = self.vy + self.gravity
+	--[[
 	for i, pipe in pairs(self.level.pipes) do
 		if self.x + self.size > pipe.x and self.x < pipe.x + pipe.w then
 			if self.y + self.size > pipe.y and self.y < pipe.y + pipe.h then
@@ -55,9 +70,7 @@ function Player:update(dt)
 		end
 	end
 	if self.y + self.size > self.level.ground then
-		if not self.dead then
-			self:die()
-		end
+		self:die()
 		self.y = self.level.ground - self.size
-	end
+	end]]--
 end
