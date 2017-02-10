@@ -2,9 +2,8 @@ require "class"
 
 Level = class()
 
-function Level:_init(keyboard, player, game)
+function Level:_init(player, game)
 	self.game = game
-	self.keyboard = keyboard
 
 	self.frequency = 2 --Interval to draw a new pipe
 	self.height = 100 -- pixels tall to make the gap
@@ -13,8 +12,8 @@ function Level:_init(keyboard, player, game)
 
 	self.screenX = 0
 
-	self.SCREENWIDTH = 600
-	self.SCREENHEIGHT = 800
+	self.SCREENWIDTH = game.SCREENWIDTH
+	self.SCREENHEIGHT = game.SCREENHEIGHT
 end
 
 --Makes the rectangles to avoid
@@ -29,9 +28,9 @@ end
 
 function Level:draw()
 	for i, pipe in pairs(pipes)
-		if (pipe[x] < self.screenX + self.SCREENWIDTH and pipe[x] + pipe[w] > self.screenX)
+		if (pipe.x < self.screenX + self.SCREENWIDTH and pipe.x + pipe.w > self.screenX)
 			love.graphics.setColor(40, 219, 13)
-			love.graphics.rectangle("fill", pipe[x], pipe[y], pipe[w], pipe[h])
+			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
 		end
 	end
 end

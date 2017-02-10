@@ -18,13 +18,13 @@ end
 
 function Button:draw()
 	if self.selected then
-		love.graphics.setColor(self.selectedColor)
+		love.graphics.setColor(self.selectedColor[1], self.selectedColor[2], self.selectedColor[3])
 	else
-		love.graphics.setColor(self.normalColor)
+		love.graphics.setColor(self.normalColor[1], self.normalColor[2], self.normalColor[3])
 	end
 	love.graphics.rectangle("fill", self.x-self.width/2, self.y-self.height/2, self.width, self.height)
 	love.graphics.setColor(0, 0, 0)
-	love.graphics.rectangle("line", self.x-self.width/2, self.y-self.height/2, self.width, self.height)
+	-- love.graphics.rectangle("line", self.x-self.width/2, self.y-self.height/2, self.width, self.height)
 end
 
 function Button:updateMouse(mX, mY)
