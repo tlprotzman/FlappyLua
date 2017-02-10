@@ -57,7 +57,7 @@ function Player:keypressed(key)
 	self:fly()
 end
 
-function Game:mousepressed(x, y, button)
+function Player:mousepressed(x, y, button)
 	self.still = false
 	self:fly()
 end

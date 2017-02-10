@@ -1,5 +1,6 @@
 
--- require "level"
+require "player"
+require "level"
 require "mainmenu"
 
 require "class"
@@ -19,6 +20,8 @@ function Game:_init()
 
 	-- self.level = Level(self.keyboard, nil, self) -- we should have it load by filename or something.
 	self.mainMenu = MainMenu(self)
+	self.level= Level(self)
+	self.player = Player(self.level)
 	self.screenStack = {}
 	
 	-- self.bg = love.graphics.newImage('images/bg.png')
@@ -28,7 +31,8 @@ function Game:_init()
 	-- bgm:setLooping( true )
 	-- bgm:play()
 
-	self:addToScreenStack(self.mainMenu)
+	self:addToScreenStack(self.level)
+	-- self:addToScreenStack(self.player)
 	self.SCREENWIDTH = 600
 	self.SCREENHEIGHT = 800
 	self.fullCanvas = love.graphics.newCanvas(self.SCREENWIDTH, self.SCREENHEIGHT)
