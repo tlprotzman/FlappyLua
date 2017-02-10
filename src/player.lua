@@ -79,15 +79,6 @@ function Player:update(dt)
 		self.vy = sign(self.vy) * self.maxSpeed
 	end
 	
-	-- Pipe Collisions
-	for i, pipe in pairs(self.level.pipes) do
-		if self.x + self.size > pipe.x and self.x < pipe.x + pipe.w then
-			if self.y + self.size > pipe.y and self.y < pipe.y + pipe.h then
-				self:die()
-			end
-		end
-	end
-	
 	-- Ground Collisions
 	if self.y > self.screenHeight then
 		self.dead = true

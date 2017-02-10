@@ -9,14 +9,22 @@ PauseMenu = class()
 
 -- _init, load, draw, update(dt), keypressed, keyreleased, mousepressed, mousereleased, resize, (drawUnder, updateUnder)
 
-function PauseMenu:_init(args)
+function PauseMenu:_init(game)
 	-- this is for the draw stack
-	self.drawUnder = false
+	self.game = game
+	self.drawUnder = true
 	self.updateUnder = false
+	self.font = love.graphics.newFont(32)
+	self.fontHeight = self.font:getHeight()
+	self.buttons = { resume = Button("Resume", 300, 400, 200, 75, self.fontHeight),
+					 Exit = Button("Exit", 300, 500, 200, 75, self.fontHeight),
+					}
 end
 
 function PauseMenu:load()
 	-- run when the level is given control
+	love.graphics.setFont(self.font)
+	love.mouse.setVisible(true)
 end
 
 function PauseMenu:leave()
@@ -25,10 +33,17 @@ end
 
 function PauseMenu:draw()
 	--
+	for k, v in pairs(self.buttons) do
+		v:draw()
+	end
 end
 
 function PauseMenu:update(dt)
-	--
+	local mX = love.mouse.getX()
+	local mY = love.mouse.getY()
+	for k, v in pairs(self.buttons) do
+		v:updateMouse(mX, mY)
+	end
 end
 
 function PauseMenu:resize(w, h)
@@ -48,5 +63,15 @@ function PauseMenu:mousepressed(x, y, button)
 end
 
 function PauseMenu:mousereleased(x, y, button)
-	--
+	for k, v in pairs(self.buttons) do
+		if v:updateMouse(x, y) then
+			-- print(v.text .. " was pressed")
+			if v.text == "Exit" then
+				self.game:popScreenStack()
+				self.game:popScreenStack()
+			elseif v.text == "Resume" then
+				self.game:popScreenStack()
+			end
+		end
+	end
 end
