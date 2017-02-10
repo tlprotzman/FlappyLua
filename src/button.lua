@@ -33,7 +33,7 @@ end
 
 function Button:updateMouse(mX, mY)
 	if (mX > self.x-self.width/2 and mX < self.x+self.width/2) then
-		if (mY > self.y-self.width/2 and mY < self.y + self.height/2) then
+		if (mY > self.y-self.height/2 and mY < self.y + self.height/2) then
 			self.selected = true
 			return true
 		end

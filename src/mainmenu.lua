@@ -19,7 +19,9 @@ function MainMenu:_init(game)
 	self.SCREENHEIGHT = self.game.SCREENHEIGHT
 	self.fontHeight = love.graphics.newFont(32):getHeight()
 
-	self.buttons = { play = Button("Play", 300, 400, 200, 75, self.fontHeight)}
+	self.buttons = { play = Button("Play", 300, 400, 200, 75, self.fontHeight),
+					 quit = Button("Quit", 300, 500, 200, 75, self.fontHeight),
+					}
 end
 
 function MainMenu:load()
@@ -63,6 +65,9 @@ end
 
 function MainMenu:mousepressed(x, y, button)
 	--
+	for k, v in pairs(self.buttons) do
+		-- 
+	end
 end
 
 function MainMenu:mousereleased(x, y, button)
