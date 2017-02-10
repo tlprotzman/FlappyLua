@@ -5,12 +5,16 @@ Player = class()
 --Screensize = 600x800
 
 function sign(v)
-	return (0 < v) - (0 > v)
+	if v==0 then
+		return 0
+	elseif v > 0 then
+		return 1
+	end
+	return -1
 end
 
-function Player:_init(level)
+function Player:_init()
 	
-	self.level = level
 	
 	self.jumpAmount = 6
 	self.gravity = 3
@@ -34,7 +38,7 @@ end
 function Player:die()
 	if not self.dead then
 		self.dead = true
-		self.vy = -jumpAmount
+		self.vy = -self.jumpAmount
 	end
 end
 
@@ -50,7 +54,7 @@ function Player:resize(screenWidth, screenHeight)
 end
 
 function Player:draw()
-	love.graphis.setColor ( unpack( self.color ) )
+	love.graphics.setColor ( unpack( self.color ) )
 	love.graphics.rectangle( "fill", self.x, self.y, self.size, self.size )
 end
 
@@ -67,12 +71,14 @@ end
 function Player:update(dt)
 
 	-- In case game is not yet started
-	if self.still then
-		return 
-	end
+	-- if self.still then
+	-- 	return 
+	-- end
 	
 	-- What goes up must come down
 	self.vy = self.vy + self.gravity*dt
+	self.y = self.y + self.vy
+	print(self.y)
 
 	-- Don't go to fast
 	if sign(self.vy) > self.maxSpeed then

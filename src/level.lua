@@ -45,6 +45,7 @@ function Level:draw()
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
 		end
 	end
+	self.player:draw()
 end
 
 function Level:update(dt)
@@ -53,9 +54,9 @@ function Level:update(dt)
 		pipe.x = pipe.x - moveBy
 	end
 	self.sinceLastPipe = self.sinceLastPipe + dt
-	print(self.sinceLastPipe)
+	-- print(self.sinceLastPipe)
 	if (self.sinceLastPipe > self.frequency) then
-		print(newPipe)
+		-- print(newPipe)
 		self:makeElement()
 		self.sinceLastPipe = 0
 	end
@@ -68,6 +69,8 @@ function Level:update(dt)
 			end
 		end
 	end
+
+	self.player:update(dt)
 end
 
 function Level:resize(w, h)
