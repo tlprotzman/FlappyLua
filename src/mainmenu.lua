@@ -66,7 +66,9 @@ end
 function MainMenu:mousepressed(x, y, button)
 	--
 	for k, v in pairs(self.buttons) do
-		-- 
+		if v:updateMouse(x, y) then
+			print(v.text .. " was pressed")
+		end
 	end
 end
 

@@ -15,6 +15,8 @@ function Game:_init()
 	self.updateUnder = false
 
 	-- here are the actual variables
+	self.SCREENWIDTH = 600
+	self.SCREENHEIGHT = 800
 	self.drawFPS = false
 
 
@@ -33,8 +35,6 @@ function Game:_init()
 
 	self:addToScreenStack(self.level)
 	-- self:addToScreenStack(self.player)
-	self.SCREENWIDTH = 600
-	self.SCREENHEIGHT = 800
 	self.fullCanvas = love.graphics.newCanvas(self.SCREENWIDTH, self.SCREENHEIGHT)
 end
 

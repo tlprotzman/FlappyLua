@@ -18,18 +18,26 @@ function Level:_init(game)
 	self.score = 0
 end
 
+function Level:load()
+	-- run when the level is given control
+end
+
+function Level:leave()
+	-- run when the level no longer has control
+end
+
 --Makes the rectangles to avoid
 function Level:makeElement()
 	gap = math.random(0, self.SCREENHEIGHT - self.height)
 	upperPipe = {x = self.SCREENWIDTH, y = 0, w = self.pipeWidth, h = gap}	--x, y, width, height
 	startLower = gap + self.height
 	lowerPipe = {x = self.SCREENWIDTH, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower}
-	pipes.insert(upperPipe)
-	pipes.insert(lowerPipe)
+	table.insert(self.pipes, upperPipe)
+	table.insert(self.pipes, lowerPipe)
 end
 
 function Level:draw()
-	for i, pipe in pairs(pipes) do
+	for i, pipe in pairs(self.pipes) do
 		if (pipe.x <self.SCREENWIDTH and pipe.x + pipe.w > 0) then
 			love.graphics.setColor(40, 219, 13)
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
@@ -39,11 +47,32 @@ end
 
 function Level:update(dt)
 	moveBy = self.velocity * dt
-	for i, pipe in pairs(pipes) do
+	for i, pipe in pairs(self.pipes) do
 		pipe.x = pipe.x - moveBy
 	end
 	self.sinceLastPipe = self.sinceLastPipe + dt
 	if (self.sinceLastPipe > self.frequency) then
 		self:makeElement()
 	end
+end
+
+
+function Level:resize(w, h)
+	--
+end
+
+function Level:keypressed(key, unicode)
+	--
+end
+
+function Level:keyreleased(key, unicode)
+	--
+end
+
+function Level:mousepressed(x, y, button)
+	--
+end
+
+function Level:mousereleased(x, y, button)
+	--
 end
