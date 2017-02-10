@@ -20,9 +20,9 @@ end
 --Makes the rectangles to avoid
 function Level:makeElement()
 	gap = math.random(0, self.SCREENHEIGHT - self.height)
-	upperPipe = {screenX, 0, self.pipeWidth, gap}
+	upperPipe = {x = screenX, y = 0, w = self.pipeWidth, h = gap}	--x, y, width, height
 	startLower = gap + self.height
-	lowerPipe = {screenX, startLower, self.pipeWidth, self.SCREENHEIGHT - startLower)
+	lowerPipe = {x = screenX, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower)
 	pipes.insert(upperPipe)
 	pipes.insert(lowerPipe)
 end
