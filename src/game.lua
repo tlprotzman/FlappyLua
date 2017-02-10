@@ -62,8 +62,11 @@ function Game:draw()
 		love.graphics.setColor(255, 255, 255)
 	end
 
+	-- love.graphics.rectangle("fill", 0, 0, 600, 800)
+
 	love.graphics.setCanvas()
-	love.graphics.draw(self.fullCanvas, 0, 0, 0, love.graphics.getWidth()/1920, love.graphics.getHeight()/1080)
+	love.graphics.setColor(255, 255, 255)
+	love.graphics.draw(self.fullCanvas, 0, 0, 0, love.graphics.getWidth()/600, love.graphics.getHeight()/800)
 end
 
 function Game:update(dt)
