@@ -17,12 +17,14 @@ function MainMenu:_init(game)
 	self.game = game
 	self.SCREENWIDTH = self.game.SCREENWIDTH
 	self.SCREENHEIGHT = self.game.SCREENHEIGHT
+	self.fontHeight = love.graphics.newFont(32):getHeight()
 
-	self.buttons = { play = Button("Play", 300, 200, 200, 100)}
+	self.buttons = { play = Button("Play", 300, 400, 200, 75, self.fontHeight)}
 end
 
 function MainMenu:load()
 	-- run when the level is given control
+	love.graphics.setFont(love.graphics.newFont(32))
 	love.mouse.setVisible(true)
 	love.graphics.setBackgroundColor(108, 188, 255)
 end

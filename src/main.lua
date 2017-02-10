@@ -12,7 +12,7 @@ function love.load(args)
 	
 	game:load(args)
 	--local width, height = 512, 256
-	love.window.setMode(600, 800, {resizable = true})
+	love.window.setMode(600, 800)
 	-- love.window.setFullscreen(true)
 	-- not much here
 	game:resize(width, height)
