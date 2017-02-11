@@ -25,6 +25,8 @@ function Level:_init(game, player)
 	
 	self.score = 0
 	self:makeElement()
+
+	self.flipped = true
 end
 
 function Level:reset()

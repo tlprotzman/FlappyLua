@@ -57,7 +57,11 @@ end
 
 function Player:fly()
 	if not self.dead and not self.still then
-		self.vy = -self.jumpAmount
+		if self.game.level.flipped then
+			self.vy = self.jumpAmount
+		else
+			self.vy = -self.jumpAmount
+		end
 	end
 end
 
@@ -112,5 +116,13 @@ function Player:update(dt)
 	elseif self.y < 0 then
 		self.y = 0
 		self.vy = 0
+	end
+
+	if self.game.level.flipped then
+		self.jumpAmount = 15
+		self.gravity = - 30
+	else
+		self.jumpAmount = 15
+		self.gravity = 30
 	end
 end
