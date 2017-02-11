@@ -67,12 +67,19 @@ end
 
 function Level:draw()
 	love.graphics.setBackgroundColor(self.color, self.color, self.color)
-	love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
 	for i, pipe in pairs(self.pipes) do
 		if (pipe.x <self.SCREENWIDTH and pipe.x + pipe.w > 0) then
+			love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
+			love.graphics.setColor ( 255, 255, 255 )
+			if pipe.y == 0 then
+				love.graphics.printf(math.floor((i+1)/2), pipe.x, pipe.y + pipe.h - 80, pipe.w, "center")
+			else
+				love.graphics.printf(math.floor((i+1)/2), pipe.x, pipe.y + 40, pipe.w, "center")
+			end
 		end
 	end
+	love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
 	self.player:draw()
 end
 

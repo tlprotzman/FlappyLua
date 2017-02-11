@@ -4,8 +4,6 @@ require "class"
 
 Button = class()
 
-
-
 function Button:_init(text, x, y, width, height, fontHeight)
 	self.x = x
 	self.y = y

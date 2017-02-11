@@ -34,10 +34,16 @@ end
 
 function DeathMenu:setLatestScore(score)
 	self.score = score
+	self.backgroundRectWidth = math.max(self.font:getWidth("YOU DIED!"), self.font:getWidth("Score: "..self.score))+40
+	self.backgroundRectHeight = (175+self.fontHeight) - 125+40
 end
 
 function DeathMenu:draw()
+	love.graphics.setColor(225, 48, 58)--(225, 48, 58) -- 220, 220, 255
+	love.graphics.rectangle("fill", 300-self.backgroundRectWidth/2, 125-20, self.backgroundRectWidth, self.backgroundRectHeight, 10, 10)
+
 	love.graphics.setColor(0, 0, 0)
+	love.graphics.rectangle("line", 300-self.backgroundRectWidth/2, 125-20, self.backgroundRectWidth, self.backgroundRectHeight, 10, 10)
 	love.graphics.printf("YOU DIED!", 300-500, 125, 1000, "center")
 	love.graphics.printf("Score: "..self.score, 300-500, 175, 1000, "center")
 	for k, v in pairs(self.buttons) do
@@ -59,6 +65,10 @@ end
 
 function DeathMenu:keypressed(key, unicode)
 	--
+	if key == "escape" then
+		self.game:popScreenStack()
+		self.game:popScreenStack()
+	end
 end
 
 function DeathMenu:keyreleased(key, unicode)
