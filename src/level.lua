@@ -16,8 +16,7 @@ function Level:_init(game, player)
 
 	self.SCREENWIDTH = game.SCREENWIDTH
 	self.SCREENHEIGHT = game.SCREENHEIGHT
-	music = love.audio.newSource("lua.mp3") 
-	music:play()
+
 	self.color = 200
 	self.colorDirection = -1
 	self.colorSpeed = 3
@@ -91,9 +90,9 @@ function Level:update(dt)
 		return
 	end
 
-	if self.score > 10 and self.score % 2 == 0 then
+	if self.score > 1 and self.score % 20 == 0 then
 		self.flipped = true
-	else
+	elseif self.score % 10 == 0 then
 		self.flipped = false
 	end
 	--
@@ -122,23 +121,14 @@ function Level:update(dt)
 	end
 	
 	-- Pipe Collisions
-	if self.flipped then
-		for i, pipe in pairs(self.pipes) do
-			if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.w then
-				if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.h then
-					self.player:die()
-				end
-			end
-		end
-	else
-		for i, pipe in pairs(self.pipes) do
-			if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.w then
-				if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.h then
-					self.player:die()
-				end
+	for i, pipe in pairs(self.pipes) do
+		if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.w then
+			if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.h then
+				self.player:die()
 			end
 		end
 	end
+
 	self.player:update(dt)
 end
 

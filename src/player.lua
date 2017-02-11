@@ -123,14 +123,26 @@ function Player:update(dt)
 	end
 	
 	-- Ground Collisions
-	if self.y > self.screenHeight then
-		self.dead = true
-		self.gameover = true
-		self.game.deathMenu:setLatestScore(self.game.level.score)
-		self.game:addToScreenStack(self.game.deathMenu)
-	elseif self.y < 0 then
-		self.y = 0
-		self.vy = 0
+	if self.game.level.flipped then
+		if self.y < 0 then
+			self.dead = true
+			self.gameover = true
+			self.game.deathMenu:setLatestScore(self.game.level.score)
+			self.game:addToScreenStack(self.game.deathMenu)
+		elseif self.y > self.screenHeight  then
+			self.y = 0
+			self.vy = 0
+		end
+	else
+		if self.y > self.screenHeight then
+			self.dead = true
+			self.gameover = true
+			self.game.deathMenu:setLatestScore(self.game.level.score)
+			self.game:addToScreenStack(self.game.deathMenu)
+		elseif self.y < 0 then
+			self.y = 0
+			self.vy = 0
+		end
 	end
 
 	if self.game.level.flipped then
