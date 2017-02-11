@@ -28,12 +28,18 @@ function Player:_init(game)
 	self.still = true
 	self.dead = false
 	self.gameover = false
+	self.py = false
 	
 	self.color = {225, 200, 0}
 	self.size = 50
 	
 	self.image = love.graphics.newImage('logo.png')
 	self.image2 = love.graphics.newImage('logotext.png')
+	self.imagepy = love.graphics.newImage('pygame.png')
+	
+	if math.random()*10 > 8 then
+		self.py = true
+	end
 	
 	self.screenHeight = 800
 end
@@ -46,6 +52,10 @@ function Player:reset()
 	self.vy = 0
 	self.still = true
 	self.gameover = false
+	self.py = false
+	if math.random()*10 > 8 then
+		self.py = true
+	end
 end
 
 function Player:die()
@@ -73,9 +83,14 @@ end
 function Player:draw()
 	--love.graphics.setColor ( unpack( self.color ) )
 	--love.graphics.rectangle( "fill", self.x, self.y, self.size, self.size )
-	love.graphics.draw(self.image, self.x, self.y, 0, 1, 1)
-	love.graphics.setColor ( 255, 255, 255 )
-	love.graphics.draw(self.image2, self.x, self.y, 0, 1, 1)
+	if self.py == false then
+		love.graphics.draw(self.image, self.x, self.y, 0, 1, 1)
+		love.graphics.setColor ( 255, 255, 255 )
+		love.graphics.draw(self.image2, self.x, self.y, 0, 1, 1)
+	else
+		love.graphics.setColor ( 255, 255, 255 )
+		love.graphics.draw(self.imagepy, self.x, self.y, 0, 1, 1)
+	end
 end
 
 function Player:keypressed(key)
