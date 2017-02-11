@@ -13,8 +13,8 @@ function Button:_init(text, x, y, width, height, fontHeight)
 	self.height = height
 	self.text = text
 	self.selected = false
-	self.normalColor = {255, 84, 86}
-	self.selectedColor = {255, 163, 165}
+	self.normalColor = {110, 150, 255} --{255, 84, 86}
+	self.selectedColor = {220, 220, 255} -- {255, 163, 165}
 	self.fontHeight = fontHeight
 end
 

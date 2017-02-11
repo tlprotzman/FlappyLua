@@ -4,6 +4,7 @@ require "level"
 require "mainmenu"
 require "joysticktester"
 require "pausemenu"
+require "deathmenu"
 
 require "class"
 
@@ -25,10 +26,11 @@ function Game:_init()
 
 	-- self.level = Level(self.keyboard, nil, self) -- we should have it load by filename or something.
 	self.mainMenu = MainMenu(self)
-	self.player = Player()
+	self.player = Player(self)
 	self.level= Level(self, self.player)
 	self.pauseMenu = PauseMenu(self)
 	self.joystickTester = JoystickTester(self)
+	self.deathMenu = DeathMenu(self)
 	self.screenStack = {}
 	
 	-- self.bg = love.graphics.newImage('images/bg.png')

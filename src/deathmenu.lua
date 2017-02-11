@@ -37,8 +37,9 @@ function DeathMenu:setLatestScore(score)
 end
 
 function DeathMenu:draw()
-	love.graphics.printf("YOU DIED!", 300, 125, 1000, "center")
-	love.graphics.printf("Score: "..self.score, 300, 175, 1000, "center")
+	love.graphics.setColor(0, 0, 0)
+	love.graphics.printf("YOU DIED!", 300-500, 125, 1000, "center")
+	love.graphics.printf("Score: "..self.score, 300-500, 175, 1000, "center")
 	for k, v in pairs(self.buttons) do
 		v:draw()
 	end

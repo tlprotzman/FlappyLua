@@ -13,10 +13,10 @@ function sign(v)
 	return -1
 end
 
-function Player:_init()
+function Player:_init(game)
+	self.game = game
 
-	
-	
+
 	self.jumpAmount = 15
 	self.gravity = 30
 	self.x = 200
@@ -105,6 +105,8 @@ function Player:update(dt)
 	if self.y > self.screenHeight then
 		self.dead = true
 		self.gameover = true
+		self.game.deathMenu:setLatestScore(self.game.level.score)
+		self.game:addToScreenStack(self.game.deathMenu)
 	elseif self.y < 0 then
 		self.y = 0
 		self.vy = 0
