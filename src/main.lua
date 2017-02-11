@@ -9,7 +9,7 @@ local game = Game()
 
 
 function love.load(args)
-	
+	love.window.setTitle("LuaBird")
 	game:load(args)
 	--local width, height = 512, 256
 	love.window.setMode(600, 800)

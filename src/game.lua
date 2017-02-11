@@ -14,7 +14,6 @@ Game = class()
 -- _init, load, draw, update(dt), keypressed, keyreleased, mousepressed, mousereleased, resize, (drawUnder, updateUnder)
 
 function Game:_init()
-	love.window.setTitle("FlappyLua")
 	-- these are for draw stacks:
 	self.drawUnder = false
 	self.updateUnder = false

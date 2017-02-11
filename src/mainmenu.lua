@@ -24,9 +24,11 @@ function MainMenu:_init(game)
 					 quit = Button("Quit", 300, 500, 200, 75, self.fontHeight),
 					 test = Button("Test", 300, 600, 200, 75, self.fontHeight),
 					}
-					
+	
 	self.image = love.graphics.newImage('mainmenu.png')
 	self.hasJoysticks = false
+	self.joystickIndicatorGrowing = true
+	self.joystickIndicatorScale = 1
 end
 
 function MainMenu:load()
@@ -47,7 +49,7 @@ function MainMenu:draw()
 	end
 	if self.hasJoysticks then -- display that you have a joystick connected
 		love.graphics.setColor(0, 0, 128)--90, 100, 255)
-		love.graphics.printf("With Controllers!", 172, 250, 500, "center", -.27)
+		love.graphics.printf("With Controllers!", 172, 250, 500, "center", -.27, self.joystickIndicatorScale, self.joystickIndicatorScale)
 	end
 end
 
@@ -56,6 +58,17 @@ function MainMenu:update(dt)
 	local mY = love.mouse.getY()
 	for k, v in pairs(self.buttons) do
 		v:updateMouse(mX, mY)
+	end
+	if self.joystickIndicatorGrowing then
+		self.joystickIndicatorScale = self.joystickIndicatorScale + dt*.03
+		if self.joystickIndicatorScale > 1.01 then
+			self.joystickIndicatorGrowing = false
+		end
+	else
+		self.joystickIndicatorScale = self.joystickIndicatorScale - dt*.03
+		if self.joystickIndicatorScale < .99 then
+			self.joystickIndicatorGrowing = true
+		end
 	end
 end
 
