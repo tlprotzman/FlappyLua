@@ -5,6 +5,7 @@ require "mainmenu"
 require "joysticktester"
 require "pausemenu"
 require "deathmenu"
+require "joystickmanager"
 
 require "class"
 
@@ -31,6 +32,7 @@ function Game:_init()
 	self.pauseMenu = PauseMenu(self)
 	self.joystickTester = JoystickTester(self)
 	self.deathMenu = DeathMenu(self)
+	self.joystickManager = JoystickManager(self)
 	self.screenStack = {}
 	
 	-- self.bg = love.graphics.newImage('images/bg.png')
@@ -82,6 +84,7 @@ function Game:draw()
 end
 
 function Game:update(dt)
+	self.joystickManager:update(dt)
 	for i = #self.screenStack, 1, -1 do
 		self.screenStack[i]:update(dt)
 		if self.screenStack[i] and not self.screenStack[i].updateUnder then
@@ -125,6 +128,10 @@ end
 
 function Game:mousereleased(x, y, button)
 	self.screenStack[#self.screenStack]:mousereleased(x, y, button)
+end
+
+function Game:joystickadded(joystick)
+	self.joystickManager:getJoysticks()
 end
 
 function Game:quit()
