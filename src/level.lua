@@ -121,14 +121,23 @@ function Level:update(dt)
 	end
 	
 	-- Pipe Collisions
-	for i, pipe in pairs(self.pipes) do
-		if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.w then
-			if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.h then
-				self.player:die()
+	if self.flipped then
+		for i, pipe in pairs(self.pipes) do
+			if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.w then
+				if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.h then
+					self.player:die()
+				end
+			end
+		end
+	else
+		for i, pipe in pairs(self.pipes) do
+			if self.player.x + self.player.size > pipe.x and self.player.x < pipe.x + pipe.w then
+				if self.player.y + self.player.size > pipe.y and self.player.y < pipe.y + pipe.h then
+					self.player:die()
+				end
 			end
 		end
 	end
-
 	self.player:update(dt)
 end
 
