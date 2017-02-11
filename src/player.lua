@@ -60,6 +60,7 @@ end
 
 function Player:die()
 	if not self.dead then
+		self.game.level.velocity = 0
 		self.dead = true
 		self.vy = -self.jumpAmount
 	end

@@ -21,6 +21,7 @@ function Game:_init()
 	-- here are the actual variables
 	self.SCREENWIDTH = 600
 	self.SCREENHEIGHT = 800
+	self.fullscreen = false
 	self.drawFPS = false
 
 

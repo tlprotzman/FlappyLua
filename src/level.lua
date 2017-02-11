@@ -37,6 +37,7 @@ function Level:reset()
 	self:makeElement()
 	self.player:reset()
 	self.sinceLastPipe = 0
+	self.velocity = 200
 end
 
 function Level:load()
