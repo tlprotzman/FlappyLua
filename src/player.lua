@@ -16,8 +16,8 @@ end
 function Player:_init()
 	
 	
-	self.jumpAmount = 6
-	self.gravity = 3
+	self.jumpAmount = 15
+	self.gravity = 30
 	self.x = 200
 	self.y = 400
 	self.vx = 0
@@ -29,7 +29,7 @@ function Player:_init()
 	self.gameover = false
 	
 	self.color = {225, 200, 0}
-	self.size = 10
+	self.size = 50
 	
 	self.screenHeight = 800
 	
@@ -43,8 +43,8 @@ function Player:die()
 end
 
 function Player:fly()
-	if key == "space" and not self.dead and not self.still then
-		self.vy = self.vy - self.jumpAmount
+	if not self.dead and not self.still then
+		self.vy = -self.jumpAmount
 	end
 end
 
@@ -59,8 +59,10 @@ function Player:draw()
 end
 
 function Player:keypressed(key)
-	self.still = false
-	self:fly()
+	if key == "space" then
+		self.still = false
+		self:fly()
+	end
 end
 
 function Player:mousepressed(x, y, button)

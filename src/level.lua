@@ -8,7 +8,7 @@ function Level:_init(game, player)
 
 	self.sinceLastPipe = 0 
 	self.frequency = 2 --Interval to draw a new pipe
-	self.height = 150 -- pixels tall to make the gap
+	self.height = 400 -- pixels tall to make the gap
 	self.pipeWidth = 100
 	self.velocity = 200 --Speed of the pipes
 	self.pipes = {}
@@ -79,8 +79,9 @@ end
 
 function Level:keypressed(key, unicode)
 	if (key == "escape") then
-		self.game:addToScreenStack(self.pauseMenu)
+		self.game:addToScreenStack(self.game.pauseMenu)
 	end
+	self.player:keypressed(key, unicode)
 end
 
 function Level:keyreleased(key, unicode)
@@ -89,6 +90,7 @@ end
 
 function Level:mousepressed(x, y, button)
 	--
+	self.player:mousepressed(x, y, button)
 end
 
 function Level:mousereleased(x, y, button)
