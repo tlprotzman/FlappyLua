@@ -45,6 +45,10 @@ function MainMenu:draw()
 	for k, v in pairs(self.buttons) do
 		v:draw()
 	end
+	if self.hasJoysticks then -- display that you have a joystick connected
+		love.graphics.setColor(0, 0, 128)--90, 100, 255)
+		love.graphics.printf("With Controllers!", 172, 250, 500, "center", -.27)
+	end
 end
 
 function MainMenu:update(dt)
