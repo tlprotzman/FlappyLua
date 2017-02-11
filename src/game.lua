@@ -2,6 +2,7 @@
 require "player"
 require "level"
 require "mainmenu"
+require "joysticktester"
 require "pausemenu"
 
 require "class"
@@ -27,6 +28,7 @@ function Game:_init()
 	self.player = Player()
 	self.level= Level(self, self.player)
 	self.pauseMenu = PauseMenu(self)
+	self.joystickTester = JoystickTester(self)
 	self.screenStack = {}
 	
 	-- self.bg = love.graphics.newImage('images/bg.png')

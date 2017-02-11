@@ -32,6 +32,8 @@ function Player:_init()
 	self.color = {225, 200, 0}
 	self.size = 50
 	
+	self.image = love.graphics.newImage('logo.png')
+	
 	self.screenHeight = 800
 end
 
@@ -64,8 +66,10 @@ function Player:resize(screenWidth, screenHeight)
 end
 
 function Player:draw()
-	love.graphics.setColor ( unpack( self.color ) )
-	love.graphics.rectangle( "fill", self.x, self.y, self.size, self.size )
+	--love.graphics.setColor ( unpack( self.color ) )
+	--love.graphics.rectangle( "fill", self.x, self.y, self.size, self.size )
+	love.graphics.setColor ( 255, 255, 255 )
+	love.graphics.draw(self.image, self.x, self.y, 0, 1, 1)
 end
 
 function Player:keypressed(key)
@@ -101,5 +105,8 @@ function Player:update(dt)
 	if self.y > self.screenHeight then
 		self.dead = true
 		self.gameover = true
+	elseif self.y < 0 then
+		self.y = 0
+		self.vy = 0
 	end
 end

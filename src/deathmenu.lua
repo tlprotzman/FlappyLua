@@ -76,8 +76,8 @@ function DeathMenu:mousereleased(x, y, button)
 				self.game:popScreenStack()
 				self.game:popScreenStack()
 			elseif v.text == "Retry" then
+				self.game.level:reset()
 				self.game:popScreenStack()
-				print("CURRENTLY DOESN'T ACTUALLY RESET ANYTHING! PLS TRISTAN MAKE RESET PLS")
 			end
 		end
 	end
