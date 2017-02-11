@@ -10,6 +10,7 @@ function JoystickManager:_init(game)
 	self.joysticks = {}
 	self:getJoysticks()
 	self.game = game
+	self.pressed = false
 end
 
 function JoystickManager:getJoysticks()
@@ -25,9 +26,13 @@ function JoystickManager:update(dt)
 		local buttons = v:getButtonCount()
 		for i = 1, buttons do
 			if v:isDown(i) then
-				self.game:keypressed("space", " ")
+				if not self.pressed then
+					self.game:keypressed("space", " ")
+					self.pressed = true
+				end
 				return
 			end
 		end
 	end
+	self.pressed = false
 end

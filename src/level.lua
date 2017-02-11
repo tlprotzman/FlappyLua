@@ -92,9 +92,9 @@ function Level:update(dt)
 		return
 	end
 
-	if self.score > 10 and self.score % 2 == 0 then
+	if self.score > 1 and self.score % 20 == 0 then
 		self.flipped = true
-	else
+	elseif self.score % 10 == 0 then
 		self.flipped = false
 	end
 	--
