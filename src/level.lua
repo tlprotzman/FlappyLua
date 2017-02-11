@@ -18,6 +18,7 @@ function Level:_init(game, player)
 	self.SCREENHEIGHT = game.SCREENHEIGHT
 	music = love.audio.newSource("lua.mp3") 
 	music:play()
+	self.scoreSound = love.audio.newSource("jump.mp3") 
 	self.color = 200
 	self.colorDirection = -1
 	self.colorSpeed = 3
@@ -107,6 +108,7 @@ function Level:update(dt)
 		pipe.x = pipe.x - moveBy
 		if (pipe.x + pipe.w < 200 and pipe.counted == false and not self.player.dead) then
 			self.score = self.score + 0.5
+			self.scoreSound:play()
 			pipe.counted = true
 			-- print("HIT")
 		end
