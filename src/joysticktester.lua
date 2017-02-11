@@ -8,10 +8,12 @@ JoystickTester = class()
 
 -- _init, load, draw, update(dt), keypressed, keyreleased, mousepressed, mousereleased, resize, (drawUnder, updateUnder)
 
-function JoystickTester:_init(args)
+function JoystickTester:_init(game)
 	-- this is for the draw stack
 	self.drawUnder = false
 	self.updateUnder = false
+	
+	self.game = game
 end
 
 function JoystickTester:load()
@@ -40,6 +42,9 @@ end
 
 function JoystickTester:keyreleased(key, unicode)
 	--
+	if key == "escape" then
+		self.game:popScreenStack()
+	end
 end
 
 function JoystickTester:mousepressed(x, y, button)
