@@ -64,7 +64,10 @@ function MainMenu:resize(w, h)
 end
 
 function MainMenu:keypressed(key, unicode)
-	--
+	if key == "space" then
+		self.game.level:reset() -- play
+		self.game:addToScreenStack(self.game.level)
+	end
 end
 
 function MainMenu:keyreleased(key, unicode)
