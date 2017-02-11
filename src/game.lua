@@ -150,6 +150,8 @@ function Game:keypressed(key, unicode)
 		love.window.setFullscreen(self.fullscreen)
 	elseif key == "f3" then
 		self:takeScreenshot()
+	elseif key == "f1" then
+		love.event.quit()
 	end
 end
 
