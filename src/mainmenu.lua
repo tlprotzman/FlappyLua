@@ -74,7 +74,6 @@ function MainMenu:mousereleased(x, y, button)
 			if v.text == "Quit" then
 				love.event.quit()
 			elseif v.text == "Play" then
-				self.game.level:reset()
 				self.game:addToScreenStack(self.game.level)
 			elseif v.text == "Test" then
 				self.game:addToScreenStack(self.game.pauseMenu)

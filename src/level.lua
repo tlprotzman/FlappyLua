@@ -8,7 +8,7 @@ function Level:_init(game, player)
 
 	self.sinceLastPipe = 0 
 	self.frequency = 2 --Interval to draw a new pipe
-	self.height = 150 -- pixels tall to make the gap
+	self.height = 400 -- pixels tall to make the gap
 	self.pipeWidth = 100
 	self.velocity = 200 --Speed of the pipes
 	self.pipes = {}
@@ -18,6 +18,14 @@ function Level:_init(game, player)
 
 	self.score = 0
 	self:makeElement()
+end
+
+function Level:reset()
+	self.score = 0
+	self.pipes = {}
+	self:makeElement()
+	self.player:reset()
+	self.sinceLastPipe = 0
 end
 
 function Level:load()
@@ -45,6 +53,7 @@ function Level:draw()
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
 		end
 	end
+	self.player:draw()
 end
 
 function Level:update(dt)
@@ -57,9 +66,9 @@ function Level:update(dt)
 		end
 	end
 	self.sinceLastPipe = self.sinceLastPipe + dt
-	print(self.sinceLastPipe)
+	-- print(self.sinceLastPipe)
 	if (self.sinceLastPipe > self.frequency) then
-		print(newPipe)
+		-- print(newPipe)
 		self:makeElement()
 		self.sinceLastPipe = 0
 	end
@@ -72,6 +81,8 @@ function Level:update(dt)
 			end
 		end
 	end
+
+	self.player:update(dt)
 end
 
 function Level:resize(w, h)
@@ -80,8 +91,9 @@ end
 
 function Level:keypressed(key, unicode)
 	if (key == "escape") then
-		self.game:addToScreenStack(self.pauseMenu)
+		self.game:addToScreenStack(self.game.pauseMenu)
 	end
+	self.player:keypressed(key, unicode)
 end
 
 function Level:keyreleased(key, unicode)
@@ -90,6 +102,7 @@ end
 
 function Level:mousepressed(x, y, button)
 	--
+	self.player:mousepressed(x, y, button)
 end
 
 function Level:mousereleased(x, y, button)
