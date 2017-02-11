@@ -19,7 +19,7 @@ function Level:_init(game, player)
 	self.color = 200
 	self.colorDirection = -1
 	self.colorSpeed = 3
-	self.colorStages = {{0, 0, 128}, {0, 128, 0}, {128, 0, 0}}
+	self.colorStages = {{0, 0, 128}, {0, 128, 0}, {128, 0, 0}, {128, 0, 128}, {0, 128, 128}, {128, 128, 0}}
 	self.colorStage = 1
 	
 	self.score = 0
@@ -65,9 +65,9 @@ end
 
 function Level:draw()
 	love.graphics.setBackgroundColor(self.color, self.color, self.color)
+	love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
 	for i, pipe in pairs(self.pipes) do
 		if (pipe.x <self.SCREENWIDTH and pipe.x + pipe.w > 0) then
-			love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
 		end
 	end
@@ -79,7 +79,7 @@ function Level:update(dt)
 		return
 	end
 	--
-	self.colorStage = math.floor(self.score / 10)%3 + 1
+	self.colorStage = math.floor(self.score / 10)%6 + 1
 	self.colorSpeed = 3 + (self.score / 3)
 	--
 	self:changeColor()

@@ -33,6 +33,7 @@ function Player:_init(game)
 	self.size = 50
 	
 	self.image = love.graphics.newImage('logo.png')
+	self.image2 = love.graphics.newImage('logotext.png')
 	
 	self.screenHeight = 800
 end
@@ -68,8 +69,9 @@ end
 function Player:draw()
 	--love.graphics.setColor ( unpack( self.color ) )
 	--love.graphics.rectangle( "fill", self.x, self.y, self.size, self.size )
-	love.graphics.setColor ( 255, 255, 255 )
 	love.graphics.draw(self.image, self.x, self.y, 0, 1, 1)
+	love.graphics.setColor ( 255, 255, 255 )
+	love.graphics.draw(self.image2, self.x, self.y, 0, 1, 1)
 end
 
 function Player:keypressed(key)
