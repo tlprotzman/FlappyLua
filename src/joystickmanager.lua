@@ -25,7 +25,7 @@ function JoystickManager:update(dt)
 		local buttons = v:getButtonCount()
 		for i = 1, buttons do
 			if v:isDown(i) then
-				self.game.keypressed("space", " ")
+				self.game:keypressed("space", " ")
 				return
 			end
 		end
