@@ -16,8 +16,8 @@ function PauseMenu:_init(game)
 	self.updateUnder = false
 	self.font = love.graphics.newFont(32)
 	self.fontHeight = self.font:getHeight()
-	self.buttons = { resume = Button("Resume", 300, 400, 200, 75, self.fontHeight),
-					 Exit = Button("Exit", 300, 500, 200, 75, self.fontHeight),
+	self.buttons = { resume = Button("Resume", 300, 400, 200, 75, self.fontHeight, self.game),
+					 Exit = Button("Exit", 300, 500, 200, 75, self.fontHeight, self.game),
 					}
 end
 

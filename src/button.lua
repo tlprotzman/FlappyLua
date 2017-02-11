@@ -4,7 +4,7 @@ require "class"
 
 Button = class()
 
-function Button:_init(text, x, y, width, height, fontHeight)
+function Button:_init(text, x, y, width, height, fontHeight, game)
 	self.x = x
 	self.y = y
 	self.width = width
@@ -14,6 +14,7 @@ function Button:_init(text, x, y, width, height, fontHeight)
 	self.normalColor = {110, 150, 255} --{255, 84, 86}
 	self.selectedColor = {220, 220, 255} -- {255, 163, 165}
 	self.fontHeight = fontHeight
+	self.game = game
 end
 
 function Button:draw()
@@ -30,6 +31,9 @@ function Button:draw()
 end
 
 function Button:updateMouse(mX, mY)
+	local t = self.game:realToFakeMouse(mX, mY)
+	mX = t.x
+	mY = t.y
 	if (mX > self.x-self.width/2 and mX < self.x+self.width/2) then
 		if (mY > self.y-self.height/2 and mY < self.y + self.height/2) then
 			self.selected = true

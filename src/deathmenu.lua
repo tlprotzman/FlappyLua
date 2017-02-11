@@ -17,8 +17,8 @@ function DeathMenu:_init(game)
 	self.font = love.graphics.newFont(32)
 	self.fontHeight = self.font:getHeight()
 	self.score = 0
-	self.buttons = { Retry = Button("Retry", 300, 400, 200, 75, self.fontHeight),
-					 Exit = Button("Exit", 300, 500, 200, 75, self.fontHeight),
+	self.buttons = { Retry = Button("Retry", 300, 400, 200, 75, self.fontHeight, self.game),
+					 Exit = Button("Exit", 300, 500, 200, 75, self.fontHeight, self.game),
 					}
 end
 

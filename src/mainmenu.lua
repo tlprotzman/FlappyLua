@@ -20,9 +20,9 @@ function MainMenu:_init(game)
 	self.font = love.graphics.newFont(32)
 	self.fontHeight = self.font:getHeight()
 
-	self.buttons = { play = Button("Play", 300, 400, 200, 75, self.fontHeight),
-					 quit = Button("Quit", 300, 500, 200, 75, self.fontHeight),
-					 test = Button("Test", 300, 600, 200, 75, self.fontHeight),
+	self.buttons = { play = Button("Play", 300, 400, 200, 75, self.fontHeight, self.game),
+					 quit = Button("Quit", 300, 500, 200, 75, self.fontHeight, self.game),
+					 -- test = Button("Test", 300, 600, 200, 75, self.fontHeight),
 					}
 	
 	self.image = love.graphics.newImage('mainmenu.png')

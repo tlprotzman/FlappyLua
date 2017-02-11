@@ -41,7 +41,7 @@ function Game:_init()
 	-- bgm:setVolume(0.9) -- 90% of ordinary volume
 	-- bgm:setLooping( true )
 	-- bgm:play()
-
+	love.graphics.setBackgroundColor(0, 0, 0)
 	self:addToScreenStack(self.mainMenu)
 	-- self:addToScreenStack(self.player)
 	self.fullCanvas = love.graphics.newCanvas(self.SCREENWIDTH, self.SCREENHEIGHT)
@@ -49,6 +49,11 @@ end
 
 function Game:load(args)
 	--
+end
+
+function Game:takeScreenshot()
+	local screenshot = love.graphics.newScreenshot()
+	screenshot:encode('png', os.time()..'.png')
 end
 
 function Game:draw()
@@ -80,7 +85,31 @@ function Game:draw()
 
 	love.graphics.setCanvas()
 	love.graphics.setColor(255, 255, 255)
-	love.graphics.draw(self.fullCanvas, 0, 0, 0, love.graphics.getWidth()/600, love.graphics.getHeight()/800)
+	if self.fullscreen then
+		local width = love.graphics.getWidth()
+		local height = love.graphics.getHeight()
+		local scale = math.min(height/800, width/600)
+		-- width/2-300*scale
+		love.graphics.draw(self.fullCanvas, width/2-300*scale, 0, 0, scale, scale)
+		love.graphics.setColor(0, 0, 0)
+		love.graphics.rectangle("fill", 0, 0, width/2-300*scale, height)
+		love.graphics.rectangle("fill", width/2+300*scale, 0, width/2-300*scale, height)
+		love.graphics.setColor(255, 255, 255)
+	else
+		love.graphics.draw(self.fullCanvas, 0, 0, 0, love.graphics.getWidth()/600, love.graphics.getHeight()/800)
+	end
+end
+
+function Game:realToFakeMouse(x, y)
+	-- converts from what the screen sees to what the game wants to see
+	if not self.fullscreen then
+		return {x = x, y = y}
+	else
+		local width = love.graphics.getWidth()
+		local height = love.graphics.getHeight()
+		local scale = math.min(height/800, width/600)
+		return {x = (x-(width/2-300*scale))/scale, y = y/scale}
+	end
 end
 
 function Game:update(dt)
@@ -116,6 +145,12 @@ end
 
 function Game:keypressed(key, unicode)
 	self.screenStack[#self.screenStack]:keypressed(key, unicode)
+	if key == "f2" or key == "f11" then
+		self.fullscreen = not self.fullscreen
+		love.window.setFullscreen(self.fullscreen)
+	elseif key == "f3" then
+		self:takeScreenshot()
+	end
 end
 
 function Game:keyreleased(key, unicode)
