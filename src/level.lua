@@ -17,6 +17,7 @@ function Level:_init(game, player)
 	self.SCREENWIDTH = game.SCREENWIDTH
 	self.SCREENHEIGHT = game.SCREENHEIGHT
 	music = love.audio.newSource("lua.mp3") 
+	music:setLooping( true )
 	music:play()
 	self.scoreSound = love.audio.newSource("jump.mp3") 
 	self.color = 200
