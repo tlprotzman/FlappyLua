@@ -77,7 +77,7 @@ function MainMenu:mousereleased(x, y, button)
 				self.game.level:reset()
 				self.game:addToScreenStack(self.game.level)
 			elseif v.text == "Test" then
-				self.game:addToScreenStack(self.game.pauseMenu)
+				self.game:addToScreenStack(self.game.joystickTester)
 			end
 		end
 	end
