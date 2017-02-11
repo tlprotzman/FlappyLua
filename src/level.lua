@@ -39,9 +39,9 @@ end
 --Makes the rectangles to avoid
 function Level:makeElement()
 	gap = math.random(0, self.SCREENHEIGHT - self.height)
-	upperPipe = {x = self.SCREENWIDTH, y = 0, w = self.pipeWidth, h = gap}	--x, y, width, height
+	upperPipe = {x = self.SCREENWIDTH, y = 0, w = self.pipeWidth, h = gap, counted = false}	--x, y, width, height
 	startLower = gap + self.height
-	lowerPipe = {x = self.SCREENWIDTH, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower}
+	lowerPipe = {x = self.SCREENWIDTH, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower, counted = false}
 	table.insert(self.pipes, upperPipe)
 	table.insert(self.pipes, lowerPipe)
 end
@@ -60,11 +60,13 @@ function Level:update(dt)
 	moveBy = self.velocity * dt
 	for i, pipe in pairs(self.pipes) do
 		pipe.x = pipe.x - moveBy
-		if (pipe.x + pipe.w < 200 and pipe.counted == false) then
-			score = score + 0.5
+		if (pipe.x + pipe.w < 200 and pipe.counted == false and not self.player.dead) then
+			self.score = self.score + 0.5
 			pipe.counted = true
+			print("HIT")
 		end
 	end
+	print(self.score)
 	self.sinceLastPipe = self.sinceLastPipe + dt
 	-- print(self.sinceLastPipe)
 	if (self.sinceLastPipe > self.frequency) then

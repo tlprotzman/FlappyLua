@@ -90,7 +90,7 @@ function Player:update(dt)
 	-- What goes up must come down
 	self.vy = self.vy + self.gravity*dt
 	self.y = self.y + self.vy
-	print(self.y)
+	-- print(self.y)
 
 	-- Don't go to fast
 	if sign(self.vy) > self.maxSpeed then
