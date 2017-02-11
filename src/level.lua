@@ -58,9 +58,9 @@ end
 function Level:makeElement()
 	gapDistance = math.max(self.height - self.scale * self.score, 150)
 	gap = math.random(0, self.SCREENHEIGHT - gapDistance)
-	upperPipe = {x = self.SCREENWIDTH, y = 0, w = self.pipeWidth, h = gap, counted = false}	--x, y, width, height
+	upperPipe = {x = self.SCREENWIDTH, y = 0-100, w = self.pipeWidth, h = gap+100, counted = false}	--x, y, width, height
 	startLower = gap + gapDistance
-	lowerPipe = {x = self.SCREENWIDTH, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower, counted = false}
+	lowerPipe = {x = self.SCREENWIDTH, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower+100, counted = false}
 	table.insert(self.pipes, upperPipe)
 	table.insert(self.pipes, lowerPipe)
 end
@@ -70,9 +70,9 @@ function Level:draw()
 	for i, pipe in pairs(self.pipes) do
 		if (pipe.x <self.SCREENWIDTH and pipe.x + pipe.w > 0) then
 			love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
-			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
+			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h, 10, 10)
 			love.graphics.setColor ( 255, 255, 255 )
-			if pipe.y == 0 then
+			if pipe.y == 0-100 then
 				love.graphics.printf(math.floor((i+1)/2), pipe.x, pipe.y + pipe.h - 80, pipe.w, "center")
 			else
 				love.graphics.printf(math.floor((i+1)/2), pipe.x, pipe.y + 40, pipe.w, "center")
@@ -99,11 +99,11 @@ function Level:update(dt)
 		if (pipe.x + pipe.w < 200 and pipe.counted == false and not self.player.dead) then
 			self.score = self.score + 0.5
 			pipe.counted = true
-			print("HIT")
+			-- print("HIT")
 		end
 	end
 	
-	print(self.score)
+	-- print(self.score)
 	self.sinceLastPipe = self.sinceLastPipe + dt
 	-- print(self.sinceLastPipe)
 	if (self.sinceLastPipe > self.frequency) then

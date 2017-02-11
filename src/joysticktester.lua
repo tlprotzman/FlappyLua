@@ -12,12 +12,13 @@ function JoystickTester:_init(game)
 	-- this is for the draw stack
 	self.drawUnder = false
 	self.updateUnder = false
-	
+	self.joysticks = love.joystick.getJoysticks()
 	self.game = game
 end
 
 function JoystickTester:load()
 	-- run when the level is given control
+	self.joysticks = love.joystick.getJoysticks()
 end
 
 function JoystickTester:leave()
@@ -25,7 +26,9 @@ function JoystickTester:leave()
 end
 
 function JoystickTester:draw()
-	--
+    for i, joystick in ipairs(self.joysticks) do
+        love.graphics.print(joystick:getName(), 10, i * 20)
+    end
 end
 
 function JoystickTester:update(dt)
