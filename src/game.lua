@@ -24,8 +24,8 @@ function Game:_init()
 
 	-- self.level = Level(self.keyboard, nil, self) -- we should have it load by filename or something.
 	self.mainMenu = MainMenu(self)
-	self.player = Player()
-	self.level= Level(self, self.player)
+	self.level= Level(self)
+	self.player = Player(self.level)
 	self.pauseMenu = PauseMenu(self)
 	self.screenStack = {}
 	
