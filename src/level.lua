@@ -20,6 +20,14 @@ function Level:_init(game, player)
 	self:makeElement()
 end
 
+function Level:reset()
+	self.score = 0
+	self.pipes = {}
+	self:makeElement()
+	self.player:reset()
+	self.sinceLastPipe = 0
+end
+
 function Level:load()
 	-- run when the level is given control
 end
