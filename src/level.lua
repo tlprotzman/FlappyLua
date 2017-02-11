@@ -49,7 +49,7 @@ end
 function Level:draw()
 	for i, pipe in pairs(self.pipes) do
 		if (pipe.x <self.SCREENWIDTH and pipe.x + pipe.w > 0) then
-			love.graphics.setColor(40, 219, 13)
+			love.graphics.setColor(0, 0, 128)
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
 		end
 	end
