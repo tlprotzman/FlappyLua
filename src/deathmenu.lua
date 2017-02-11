@@ -68,6 +68,9 @@ function DeathMenu:keypressed(key, unicode)
 	if key == "escape" then
 		self.game:popScreenStack()
 		self.game:popScreenStack()
+	elseif key == "space" then
+		self.game.level:reset() -- retry
+		self.game:popScreenStack()
 	end
 end
 
