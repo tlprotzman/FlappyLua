@@ -24,6 +24,8 @@ function MainMenu:_init(game)
 					 quit = Button("Quit", 300, 500, 200, 75, self.fontHeight),
 					 test = Button("Test", 300, 600, 200, 75, self.fontHeight),
 					}
+					
+	self.image = love.graphics.newImage('mainmenu.png')
 end
 
 function MainMenu:load()
@@ -38,6 +40,8 @@ function MainMenu:leave()
 end
 
 function MainMenu:draw()
+
+	love.graphics.draw(self.image, 130, 100, 0, 1, 1)
 	for k, v in pairs(self.buttons) do
 		v:draw()
 	end
