@@ -60,6 +60,10 @@ function Level:update(dt)
 	moveBy = self.velocity * dt
 	for i, pipe in pairs(self.pipes) do
 		pipe.x = pipe.x - moveBy
+		if (pipe.x + pipe.w < 200 and pipe.counted = false) then
+			score = score + 0.5
+			pipe.counted = true
+		end
 	end
 	self.sinceLastPipe = self.sinceLastPipe + dt
 	-- print(self.sinceLastPipe)
