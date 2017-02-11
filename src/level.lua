@@ -16,6 +16,12 @@ function Level:_init(game, player)
 	self.SCREENWIDTH = game.SCREENWIDTH
 	self.SCREENHEIGHT = game.SCREENHEIGHT
 
+	self.color = 200
+	self.colorDirection = -1
+	self.colorSpeed = 3
+	self.colorStages = {{0, 0, 128}, {0, 128, 0}, {128, 0, 0}}
+	self.colorStage = 1
+	
 	self.score = 0
 	self:makeElement()
 end
@@ -36,6 +42,17 @@ function Level:leave()
 	-- run when the level no longer has control
 end
 
+function Level:changeColor() 
+	self.color = self.color + self.colorSpeed * self.colorDirection
+	if self.color < 0 then
+		self.colorDirection = 1
+		self.color = 0
+	elseif self.color > 200 then
+		self.colorDirection = -1
+		self.color = 200
+	end
+end
+
 --Makes the rectangles to avoid
 function Level:makeElement()
 	gap = math.random(0, self.SCREENHEIGHT - self.height)
@@ -47,9 +64,10 @@ function Level:makeElement()
 end
 
 function Level:draw()
+	love.graphics.setBackgroundColor(self.color, self.color, self.color)
 	for i, pipe in pairs(self.pipes) do
 		if (pipe.x <self.SCREENWIDTH and pipe.x + pipe.w > 0) then
-			love.graphics.setColor(0, 0, 128)
+			love.graphics.setColor ( unpack(self.colorStages[self.colorStage]) )
 			love.graphics.rectangle("fill", pipe.x, pipe.y, pipe.w, pipe.h)
 		end
 	end
@@ -57,7 +75,16 @@ function Level:draw()
 end
 
 function Level:update(dt)
+	if self.player.gameover then
+		return
+	end
+	--
+	self.colorStage = math.floor(self.score / 10)%3 + 1
+	self.colorSpeed = 3 + (self.score / 3)
+	--
+	self:changeColor()
 	moveBy = self.velocity * dt
+	
 	for i, pipe in pairs(self.pipes) do
 		pipe.x = pipe.x - moveBy
 		if (pipe.x + pipe.w < 200 and pipe.counted == false and not self.player.dead) then
@@ -66,6 +93,7 @@ function Level:update(dt)
 			print("HIT")
 		end
 	end
+	
 	print(self.score)
 	self.sinceLastPipe = self.sinceLastPipe + dt
 	-- print(self.sinceLastPipe)
