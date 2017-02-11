@@ -12,6 +12,7 @@ function Level:_init(game, player)
 	self.pipeWidth = 100
 	self.velocity = 200 --Speed of the pipes
 	self.pipes = {}
+	self.scale = 2 -- how much the gap decreases by per point
 
 	self.SCREENWIDTH = game.SCREENWIDTH
 	self.SCREENHEIGHT = game.SCREENHEIGHT
@@ -55,9 +56,10 @@ end
 
 --Makes the rectangles to avoid
 function Level:makeElement()
-	gap = math.random(0, self.SCREENHEIGHT - self.height)
+	gapDistance = math.max(self.height - self.scale * self.score, 150)
+	gap = math.random(0, self.SCREENHEIGHT - gapDistance)
 	upperPipe = {x = self.SCREENWIDTH, y = 0, w = self.pipeWidth, h = gap, counted = false}	--x, y, width, height
-	startLower = gap + self.height
+	startLower = gap + gapDistance
 	lowerPipe = {x = self.SCREENWIDTH, y = startLower, w = self.pipeWidth, h = self.SCREENHEIGHT - startLower, counted = false}
 	table.insert(self.pipes, upperPipe)
 	table.insert(self.pipes, lowerPipe)
