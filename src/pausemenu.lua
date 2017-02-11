@@ -52,6 +52,9 @@ end
 
 function PauseMenu:keypressed(key, unicode)
 	--
+	if key == "escape" then
+		self.game:popScreenStack()
+	end
 end
 
 function PauseMenu:keyreleased(key, unicode)
