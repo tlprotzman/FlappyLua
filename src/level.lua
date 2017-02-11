@@ -26,7 +26,7 @@ function Level:_init(game, player)
 	self.score = 0
 	self:makeElement()
 
-	self.flipped = true
+	self.flipped = false
 end
 
 function Level:reset()
@@ -88,6 +88,12 @@ end
 function Level:update(dt)
 	if self.player.gameover then
 		return
+	end
+
+	if self.score > 10 and self.score % 2 == 0 then
+		self.flipped = true
+	else
+		self.flipped = false
 	end
 	--
 	self.colorStage = math.floor(self.score / 10)%6 + 1
