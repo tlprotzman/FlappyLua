@@ -24,7 +24,6 @@ function Game:_init()
 	self.fullscreen = false
 	self.drawFPS = false
 
-
 	-- self.level = Level(self.keyboard, nil, self) -- we should have it load by filename or something.
 	self.mainMenu = MainMenu(self)
 	self.player = Player(self)
