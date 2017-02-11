@@ -14,8 +14,6 @@ function sign(v)
 end
 
 function Player:_init()
-	
-	
 	self.jumpAmount = 6
 	self.gravity = 3
 	self.x = 200
@@ -32,7 +30,16 @@ function Player:_init()
 	self.size = 10
 	
 	self.screenHeight = 800
-	
+end
+
+function Player:reset()
+	self.dead = false
+	self.x = 200
+	self.y = 400
+	self.vx = 0
+	self.vy = 0
+	self.still = true
+	self.gameover = false
 end
 
 function Player:die()
