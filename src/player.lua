@@ -8,9 +8,7 @@ function sign(v)
 	return (0 < v) - (0 > v)
 end
 
-function Player:_init(level)
-	
-	self.level = level
+function Player:_init()
 	
 	self.jumpAmount = 6
 	self.gravity = 3
@@ -83,5 +81,7 @@ function Player:update(dt)
 	if self.y > self.screenHeight then
 		self.dead = true
 		self.gameover = true
+	else if self.y < 0 then
+		self.y = 0
 	end
 end
