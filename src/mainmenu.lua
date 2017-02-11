@@ -26,6 +26,7 @@ function MainMenu:_init(game)
 					}
 					
 	self.image = love.graphics.newImage('mainmenu.png')
+	self.hasJoysticks = false
 end
 
 function MainMenu:load()
@@ -40,7 +41,6 @@ function MainMenu:leave()
 end
 
 function MainMenu:draw()
-
 	love.graphics.draw(self.image, 130, 100, 0, 1, 1)
 	for k, v in pairs(self.buttons) do
 		v:draw()

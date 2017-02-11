@@ -14,9 +14,6 @@ end
 
 function JoystickManager:getJoysticks()
 	self.joysticks = love.joystick.getJoysticks()
-	for k, v in pairs(self.joysticks) do
-		v:open()
-	end
 end
 
 function JoystickManager:hasJoysticks()

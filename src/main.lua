@@ -59,6 +59,10 @@ function love.joystickadded(joystick)
 	game:joystickadded(joystick)
 end
 
+function love.joystickremoved(joystick)
+	game:joystickremoved(joystick)
+end
+
 function love.quit()
 	game:quit()
 end

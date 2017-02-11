@@ -132,6 +132,12 @@ end
 
 function Game:joystickadded(joystick)
 	self.joystickManager:getJoysticks()
+	self.mainMenu.hasJoysticks = self.joystickManager:hasJoysticks()
+end
+
+function Game:joystickremoved(joystick)
+	self.joystickManager:getJoysticks()
+	self.mainMenu.hasJoysticks = self.joystickManager:hasJoysticks()
 end
 
 function Game:quit()
